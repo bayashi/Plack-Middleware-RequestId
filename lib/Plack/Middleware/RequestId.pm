@@ -1,15 +1,51 @@
 package Plack::Middleware::RequestId;
 use strict;
 use warnings;
-use Carp qw/croak/;
+use 5.010000;
+
+use Data::UUID;
+use parent 'Plack::Middleware';
+use Plack::Util;
+use Plack::Util::Accessor qw/
+    http_header
+    id_generator
+/;
 
 our $VERSION = '0.01';
 
-sub new {
-    my $class = shift;
-    my $args  = shift || +{};
+sub prepare_app {
+    my ($self) = @_;
 
-    bless $args, $class;
+    unless ($self->http_header) {
+        $self->http_header('X-Request-Id');
+    }
+
+    unless ($self->id_generator) {
+        $self->id_generator(sub {
+            state $ug = Data::UUID->new;
+            substr $ug->create_hex, 2, 32;
+        });
+    }
+}
+
+sub call {
+    my($self, $env) = @_;
+
+    $env->{'psgix.request_id'}
+        = $env->{$self->http_header} || $self->id_generator->($env);
+
+    my $res = $self->app->($env);
+
+    $self->response_cb($res, sub {
+        my $res = shift;
+        if ($res) {
+            Plack::Util::header_push(
+                $res->[1],
+                $self->http_header,
+                $env->{'psgix.request_id'},
+            );
+        }
+    });
 }
 
 1;
@@ -20,17 +56,17 @@ __END__
 
 =head1 NAME
 
-Plack::Middleware::RequestId - one line description
+Plack::Middleware::RequestId - generate the request id
 
 
 =head1 SYNOPSIS
 
-    use Plack::Middleware::RequestId;
+    enable 'RequestId';
 
 
 =head1 DESCRIPTION
 
-Plack::Middleware::RequestId is
+Plack::Middleware::RequestId generates the request id and sets it into HTTP header.
 
 
 =head1 REPOSITORY
@@ -53,7 +89,7 @@ Dai Okabayashi E<lt>bayashi@cpan.orgE<gt>
 
 =head1 SEE ALSO
 
-L<Other::Module>
+L<Plack::Middleware>
 
 
 =head1 LICENSE

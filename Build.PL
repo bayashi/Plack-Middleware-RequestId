@@ -13,12 +13,19 @@ my $builder = Module::Build->new(
     },
     build_requires      => {
         'Test::More' => 0.88,
+        'HTTP::Request::Common' => 0,
+        'LWP::UserAgent' => 0,
+        'Plack::Builder' => 0,
+        'Plack::Test' => 0,
     },
     requires => {
-        'perl' => '5.008001',
+        'perl' => '5.010000',
         'strict' => 0,
         'warnings' => 0,
-        'Carp' => 0,
+        'Data::UUID' => 0,
+        'Plack::Middleware' => 0,
+        'Plack::Util' => 0,
+        'Plack::Util::Accessor' => 0,
     },
     add_to_cleanup      => [ 'Plack-Middleware-RequestId-*' ],
     meta_merge     => {
