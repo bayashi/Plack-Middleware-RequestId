@@ -63,10 +63,32 @@ Plack::Middleware::RequestId - generate the request id
 
     enable 'RequestId';
 
+options
+
+    enable 'RequestId',
+        http_header => 'X-Request-Id';
+
+use another id generator if you want
+
+    enable 'RequestId',
+        id_generator => sub {
+            Digest::MD5::md5_hex($$, time(), $env->{PATH_INFO})
+        };
 
 =head1 DESCRIPTION
 
 Plack::Middleware::RequestId generates the request id and sets it into HTTP header.
+
+
+=head1 METHODS
+
+=over
+
+=item prepare_app
+
+=item call
+
+=back
 
 
 =head1 REPOSITORY
