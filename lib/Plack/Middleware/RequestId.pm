@@ -11,7 +11,7 @@ use Plack::Util::Accessor qw/
     id_generator
 /;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 our $request_id;
 
@@ -97,7 +97,7 @@ Plack::Middleware::RequestId generates the request id and sets it into HTTP head
 
 =begin html
 
-<a href="http://travis-ci.org/bayashi/Plack-Middleware-RequestId"><img src="https://secure.travis-ci.org/bayashi/Plack-Middleware-RequestId.png"/></a> <a href="https://coveralls.io/r/bayashi/Plack-Middleware-RequestId"><img src="https://coveralls.io/repos/bayashi/Plack-Middleware-RequestId/badge.png?branch=master"/></a>
+<a href="http://travis-ci.org/bayashi/Plack-Middleware-RequestId"><img src="https://secure.travis-ci.org/bayashi/Plack-Middleware-RequestId.png?_t=1443672845"/></a> <a href="https://coveralls.io/r/bayashi/Plack-Middleware-RequestId"><img src="https://coveralls.io/repos/bayashi/Plack-Middleware-RequestId/badge.png?_t=1443672845&branch=master"/></a>
 
 =end html
 

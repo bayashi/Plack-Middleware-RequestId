@@ -1,4 +1,7 @@
 Revision history for Perl extension Plack::Middleware::RequestId
 
+0.02    Thu Oct  1 13:12:13 JST 2015
+        - export RequestId to global(you can get $Plack::Middleware::RequestId::request_id)
+
 0.01    Tue Sep 29 13:22:54 JST 2015
         - original version

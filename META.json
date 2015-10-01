@@ -43,7 +43,7 @@
    "provides" : {
       "Plack::Middleware::RequestId" : {
          "file" : "lib/Plack/Middleware/RequestId.pm",
-         "version" : "0.01"
+         "version" : "0.02"
       }
    },
    "release_status" : "stable",
@@ -62,6 +62,6 @@
          "web" : "http://webchat.freenode.net/?channels=%23bayadev"
       }
    },
-   "version" : "0.01",
+   "version" : "0.02",
    "x_serialization_backend" : "JSON::PP version 2.27300"
 }
