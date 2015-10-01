@@ -22,6 +22,7 @@ my $res = sub { [ 200, ['Content-Type' => 'text/plain'], ['OK'] ] };
             my $id = $res->header('X-Request-Id');
             is length($id), 32;
             like $id, qr/^[0-9A-F]+$/i;
+            is $id, $Plack::Middleware::RequestId::request_id;
             note $id if $ENV{AUTHOR_TEST};
     };
     test_psgi $app, $cli;

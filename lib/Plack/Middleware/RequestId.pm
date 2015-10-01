@@ -13,6 +13,8 @@ use Plack::Util::Accessor qw/
 
 our $VERSION = '0.01';
 
+our $request_id;
+
 sub prepare_app {
     my ($self) = @_;
 
@@ -31,7 +33,7 @@ sub prepare_app {
 sub call {
     my($self, $env) = @_;
 
-    $env->{'psgix.request_id'}
+    $request_id = $env->{'psgix.request_id'}
         = $env->{$self->http_header} || $self->id_generator->($env);
 
     my $res = $self->app->($env);
