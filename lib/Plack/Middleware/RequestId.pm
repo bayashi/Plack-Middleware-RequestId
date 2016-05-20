@@ -82,6 +82,17 @@ use another id generator if you want
 Plack::Middleware::RequestId generates the request id and sets it into HTTP header.
 
 
+=head1 MIDDLEWARE OPTIONS
+
+=head2 http_header
+
+The key string for an ID in HTTP Headers. default: C<X-Request-Id>
+
+=head2 id_generator
+
+The code ref for generating an ID. By default, using L<Data::UUID>.
+
+
 =head1 METHODS
 
 =over
@@ -112,6 +123,10 @@ Dai Okabayashi E<lt>bayashi@cpan.orgE<gt>
 
 
 =head1 SEE ALSO
+
+Rack::RequestId L<https://github.com/anveo/rack-request-id>
+
+L<Data::UUID>
 
 L<Plack::Middleware>
 
