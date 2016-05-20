@@ -1,5 +1,9 @@
 Revision history for Perl extension Plack::Middleware::RequestId
 
+0.03    Fri May 20 10:25:26 JST 2016
+        - improve POD
+        - add new option: psgi_env_key
+
 0.02    Thu Oct  1 13:12:13 JST 2015
         - export RequestId to global(you can get $Plack::Middleware::RequestId::request_id)
 

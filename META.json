@@ -4,7 +4,7 @@
       "Dai Okabayashi <bayashi@cpan.org>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.4214",
+   "generated_by" : "Module::Build version 0.4218",
    "license" : [
       "perl_5"
    ],
@@ -43,7 +43,7 @@
    "provides" : {
       "Plack::Middleware::RequestId" : {
          "file" : "lib/Plack/Middleware/RequestId.pm",
-         "version" : "0.02"
+         "version" : "0.03"
       }
    },
    "release_status" : "stable",
@@ -62,6 +62,6 @@
          "web" : "http://webchat.freenode.net/?channels=%23bayadev"
       }
    },
-   "version" : "0.02",
+   "version" : "0.03",
    "x_serialization_backend" : "JSON::PP version 2.27300"
 }
