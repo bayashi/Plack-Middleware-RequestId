@@ -63,4 +63,25 @@ my $res = sub { [ 200, ['Content-Type' => 'text/plain'], ['OK'] ] };
     test_psgi $app, $cli;
 }
 
+{
+    my $key = 'psgix.custom_id_key';
+    my $app = builder {
+        enable 'RequestId', psgi_env_key => $key, id_generator => sub { 456 };
+        sub {
+            my $env = shift;
+            is $env->{$key}, 456;
+            [ 200, ['Content-Type' => 'text/plain'], ['OK'] ];
+        };
+    };
+    my $cli = sub {
+            my $cb = shift;
+            my $res = $cb->(GET '/');
+            is $res->code, 200;
+            is $res->content_type, 'text/plain';
+            is $res->content, 'OK';
+            is $res->header('X-Request-Id'), 456;
+    };
+    test_psgi $app, $cli;
+}
+
 done_testing;

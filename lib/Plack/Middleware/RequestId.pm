@@ -7,6 +7,7 @@ use Data::UUID;
 use parent 'Plack::Middleware';
 use Plack::Util;
 use Plack::Util::Accessor qw/
+    psgi_env_key
     http_header
     id_generator
 /;
@@ -17,6 +18,10 @@ our $request_id;
 
 sub prepare_app {
     my ($self) = @_;
+
+    unless ($self->psgi_env_key) {
+        $self->psgi_env_key('psgix.request_id');
+    }
 
     unless ($self->http_header) {
         $self->http_header('X-Request-Id');
@@ -33,7 +38,7 @@ sub prepare_app {
 sub call {
     my($self, $env) = @_;
 
-    $request_id = $env->{'psgix.request_id'}
+    $request_id = $env->{$self->psgi_env_key}
         = $env->{$self->http_header} || $self->id_generator->($env);
 
     my $res = $self->app->($env);
@@ -44,7 +49,7 @@ sub call {
             Plack::Util::header_push(
                 $res->[1],
                 $self->http_header,
-                $env->{'psgix.request_id'},
+                $env->{$self->psgi_env_key},
             );
         }
     });
@@ -77,12 +82,18 @@ use another id generator if you want
             Digest::MD5::md5_hex($$, time(), $env->{PATH_INFO})
         };
 
+See C<MIDDLEWARE OPTIONS> for other options.
+
 =head1 DESCRIPTION
 
 Plack::Middleware::RequestId generates the request id and sets it into HTTP header.
 
 
 =head1 MIDDLEWARE OPTIONS
+
+=head2 psgi_env_key
+
+The key string for storing an ID in PSGI environment variables. default: C<psgix.request_id>
 
 =head2 http_header
 
