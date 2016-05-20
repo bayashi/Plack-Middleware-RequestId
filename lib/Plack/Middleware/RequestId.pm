@@ -104,6 +104,11 @@ The key string for an ID in HTTP Headers. default: C<X-Request-Id>
 The code ref for generating an ID. By default, using L<Data::UUID>.
 
 
+=head1 Getting ID TIPS
+
+Normally, you get the request ID from PSGI env. However, the ID has been stored C<$Plack::Middleware::RequestId::request_id> also. So you can get it anywhere.
+
+
 =head1 METHODS
 
 =over
