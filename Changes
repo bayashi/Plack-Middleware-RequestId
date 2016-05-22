@@ -1,5 +1,9 @@
 Revision history for Perl extension Plack::Middleware::RequestId
 
+0.04    Sun May 22 21:35:26 JST 2016
+        - add force_generate_id option
+        - fix bug: ignore ID in request headers
+
 0.03    Fri May 20 10:25:26 JST 2016
         - improve POD
         - add new option: psgi_env_key
