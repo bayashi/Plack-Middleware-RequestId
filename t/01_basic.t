@@ -49,6 +49,23 @@ my $res = sub { [ 200, ['Content-Type' => 'text/plain'], ['OK'] ] };
 
 {
     my $app = builder {
+        enable 'RequestId', http_header => 'X-Foo';
+        $res;
+    };
+    my $cli = sub {
+            my $cb = shift;
+            my $res = $cb->(GET '/', ("X-Foo" => "1234"));
+            is $res->code, 200;
+            is $res->content_type, 'text/plain';
+            is $res->content, 'OK';
+            my $id = $res->header('X-Foo');
+            is $id, 1234;
+    };
+    test_psgi $app, $cli;
+}
+
+{
+    my $app = builder {
         enable 'RequestId', id_generator => sub { 123 };
         $res;
     };
@@ -80,6 +97,23 @@ my $res = sub { [ 200, ['Content-Type' => 'text/plain'], ['OK'] ] };
             is $res->content_type, 'text/plain';
             is $res->content, 'OK';
             is $res->header('X-Request-Id'), 456;
+    };
+    test_psgi $app, $cli;
+}
+
+{
+    my $app = builder {
+        enable 'RequestId', force_generate_id => 1, id_generator => sub { 456 };
+        $res;
+    };
+    my $cli = sub {
+            my $cb = shift;
+            my $res = $cb->(GET '/', ("X-Request-ID" => "123"));
+            is $res->code, 200;
+            is $res->content_type, 'text/plain';
+            is $res->content, 'OK';
+            my $id = $res->header('X-Request-Id');
+            is $id, "456";
     };
     test_psgi $app, $cli;
 }

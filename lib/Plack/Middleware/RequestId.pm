@@ -9,7 +9,9 @@ use Plack::Util;
 use Plack::Util::Accessor qw/
     psgi_env_key
     http_header
+    req_http_header
     id_generator
+    force_generate_id
 /;
 
 our $VERSION = '0.03';
@@ -27,6 +29,10 @@ sub prepare_app {
         $self->http_header('X-Request-Id');
     }
 
+    my $req_http_header = 'HTTP_'. uc $self->http_header;
+    $req_http_header =~ s/-/_/g;
+    $self->req_http_header($req_http_header);
+
     unless ($self->id_generator) {
         $self->id_generator(sub {
             state $ug = Data::UUID->new;
@@ -38,8 +44,11 @@ sub prepare_app {
 sub call {
     my($self, $env) = @_;
 
-    $request_id = $env->{$self->psgi_env_key}
-        = $env->{$self->http_header} || $self->id_generator->($env);
+    $request_id
+        = $env->{$self->psgi_env_key}
+            = (!$self->force_generate_id && $env->{$self->req_http_header})
+            ? $env->{$self->req_http_header}
+            : $self->id_generator->($env);
 
     my $res = $self->app->($env);
 
@@ -102,6 +111,10 @@ The key string for an ID in HTTP Headers. default: C<X-Request-Id>
 =head2 id_generator
 
 The code ref for generating an ID. By default, using L<Data::UUID>.
+
+=head2 force_generate_id
+
+If you set true value to this oprion, then the ID always generates every request no matter what there is C<X-Request-Id> header.
 
 
 =head1 Getting ID TIPS
