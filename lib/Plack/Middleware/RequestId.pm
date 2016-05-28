@@ -11,6 +11,7 @@ use Plack::Util::Accessor qw/
     req_http_header
     id_generator
     force_generate_id
+    env_key
 /;
 
 our $VERSION = '0.04';
@@ -48,6 +49,10 @@ sub call {
             = (!$self->force_generate_id && $env->{$self->req_http_header})
             ? $env->{$self->req_http_header}
             : $self->id_generator->($env);
+
+    if ($self->env_key) {
+        $ENV{$self->env_key} = $request_id;
+    }
 
     my $res = $self->app->($env);
 
@@ -114,6 +119,10 @@ The code ref for generating an ID. By default, using L<Data::UUID>.
 =head2 force_generate_id
 
 If you set true value to this oprion, then the ID always generates every request no matter what there is C<X-Request-Id> header.
+
+=head2 env_key
+
+If you would like to store request id in %ENV also, set a key strings to this option.
 
 
 =head1 Getting ID TIPS
