@@ -1,5 +1,10 @@
 Revision history for Perl extension Plack::Middleware::RequestId
 
+0.05    Sat May 28 15:02:39 JST 2016
+        - do not use Data::UUID, by default
+        - add new option env_key for store the request id in %ENV
+        - support Perl5.8
+
 0.04    Sun May 22 21:35:26 JST 2016
         - add force_generate_id option
         - fix bug: ignore ID in request headers

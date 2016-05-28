@@ -34,7 +34,7 @@
             "Plack::Middleware" : "0",
             "Plack::Util" : "0",
             "Plack::Util::Accessor" : "0",
-            "perl" : "5.010000",
+            "perl" : "5.008000",
             "strict" : "0",
             "warnings" : "0"
          }
@@ -43,7 +43,7 @@
    "provides" : {
       "Plack::Middleware::RequestId" : {
          "file" : "lib/Plack/Middleware/RequestId.pm",
-         "version" : "0.04"
+         "version" : "0.05"
       }
    },
    "release_status" : "stable",
@@ -62,6 +62,6 @@
          "web" : "http://webchat.freenode.net/?channels=%23bayadev"
       }
    },
-   "version" : "0.04",
+   "version" : "0.05",
    "x_serialization_backend" : "JSON::PP version 2.27300"
 }
