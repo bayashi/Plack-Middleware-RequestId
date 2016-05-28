@@ -1,7 +1,6 @@
 package Plack::Middleware::RequestId;
 use strict;
 use warnings;
-use 5.010000;
 
 use Data::UUID;
 use parent 'Plack::Middleware';
@@ -34,9 +33,9 @@ sub prepare_app {
     $self->req_http_header($req_http_header);
 
     unless ($self->id_generator) {
+        $self->{_uuid_obj} = Data::UUID->new;
         $self->id_generator(sub {
-            state $ug = Data::UUID->new;
-            substr $ug->create_hex, 2, 32;
+            substr $self->{_uuid_obj}->create_hex, 2, 32;
         });
     }
 }

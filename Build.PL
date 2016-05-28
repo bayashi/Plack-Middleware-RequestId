@@ -19,7 +19,7 @@ my $builder = Module::Build->new(
         'Plack::Test' => 0,
     },
     requires => {
-        'perl' => '5.010000',
+        'perl' => '5.008000',
         'strict' => 0,
         'warnings' => 0,
         'Data::UUID' => 0,
