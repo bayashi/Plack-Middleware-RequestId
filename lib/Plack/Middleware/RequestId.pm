@@ -11,6 +11,7 @@ use Plack::Util::Accessor qw/
     id_generator
     force_generate_id
     env_key
+    no_http_header
 /;
 
 our $VERSION = '0.05';
@@ -59,7 +60,7 @@ sub call {
 
     $self->response_cb($res, sub {
         my $res = shift;
-        if ($res) {
+        if ($res && !$self->no_http_header) {
             Plack::Util::header_push(
                 $res->[1],
                 $self->http_header,
@@ -112,6 +113,10 @@ The key string for storing an ID in PSGI environment variables. default: C<psgix
 =head2 http_header
 
 The key string for an ID in HTTP Headers. default: C<X-Request-Id>
+
+=head2 no_http_header
+
+If this option was set true value then the request id does not put in HTTP Headers.
 
 =head2 id_generator
 

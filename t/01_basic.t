@@ -137,4 +137,20 @@ my $res = sub { [ 200, ['Content-Type' => 'text/plain'], ['OK'] ] };
     test_psgi $app, $cli;
 }
 
+{
+    my $app = builder {
+        enable 'RequestId', no_http_header => 1;
+        $res;
+    };
+    my $cli = sub {
+            my $cb = shift;
+            my $res = $cb->(GET '/');
+            is $res->code, 200;
+            is $res->content_type, 'text/plain';
+            is $res->content, 'OK';
+            is $res->header('X-Request-Id'), undef;
+    };
+    test_psgi $app, $cli;
+}
+
 done_testing;
