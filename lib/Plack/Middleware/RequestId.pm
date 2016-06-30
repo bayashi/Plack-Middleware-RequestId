@@ -14,7 +14,7 @@ use Plack::Util::Accessor qw/
     no_http_header
 /;
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 our $request_id;
 
@@ -151,7 +151,7 @@ Normally, you get the request ID from PSGI env. However, the ID has been stored 
 
 =begin html
 
-<a href="http://travis-ci.org/bayashi/Plack-Middleware-RequestId"><img src="https://secure.travis-ci.org/bayashi/Plack-Middleware-RequestId.png?_t=1464415439"/></a> <a href="https://coveralls.io/r/bayashi/Plack-Middleware-RequestId"><img src="https://coveralls.io/repos/bayashi/Plack-Middleware-RequestId/badge.png?_t=1464415439&branch=master"/></a>
+<a href="http://travis-ci.org/bayashi/Plack-Middleware-RequestId"><img src="https://secure.travis-ci.org/bayashi/Plack-Middleware-RequestId.png?_t=1467254265"/></a> <a href="https://coveralls.io/r/bayashi/Plack-Middleware-RequestId"><img src="https://coveralls.io/repos/bayashi/Plack-Middleware-RequestId/badge.png?_t=1467254265&branch=master"/></a>
 
 =end html
 
