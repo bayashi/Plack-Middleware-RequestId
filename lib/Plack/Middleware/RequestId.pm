@@ -151,7 +151,7 @@ Normally, you get the request ID from PSGI env. However, the ID has been stored 
 
 =begin html
 
-<a href="https://coveralls.io/r/bayashi/Plack-Middleware-RequestId"><img src="https://coveralls.io/repos/bayashi/Plack-Middleware-RequestId/badge.png?_t=1467254265&branch=master"/></a>
+<a href="https://github.com/bayashi/Plack-Middleware-RequestId/blob/main/README.pod"><img src="https://img.shields.io/badge/Version-0.06-green?style=flat"></a> <a href="https://github.com/bayashi/Plack-Middleware-RequestId/blob/main/LICENSE"><img src="https://img.shields.io/badge/LICENSE-Artistic%202.0-GREEN.png"></a> <a href="https://github.com/bayashi/Plack-Middleware-RequestId/actions"><img src="https://github.com/bayashi/Plack-Middleware-RequestId/workflows/main/badge.svg?_t=1587735883"/></a> <a href="https://coveralls.io/r/bayashi/Plack-Middleware-RequestId"><img src="https://coveralls.io/repos/bayashi/Plack-Middleware-RequestId/badge.png?_t=1587735883&branch=main"/></a>
 
 =end html
 
