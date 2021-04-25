@@ -38,4 +38,4 @@ jobs:
             chmod 0600 $HOME/.pause
             ls -la $HOME
             ls -la
-            cpan-upload -c $HOME/.pause -u $PAUSE_USER -p "" ./Test-Arrow-`perl -Ilib -MTest::Arrow -e 'print $Test::Arrow::VERSION'`.tar.gz
+            cpan-upload -c $HOME/.pause -u $PAUSE_USER -p "" ./Plack-Middleware-RequestId-`perl -Ilib -MPlack::Middleware::RequestId -e 'print $Plack::Middleware::RequestId::VERSION'`.tar.gz
