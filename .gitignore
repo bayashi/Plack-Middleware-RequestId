@@ -1,7 +1,11 @@
 cover_db
 Makefile
+Build
+_build
 blib
 inc
+local
+extlib
 pm_to_blib
 MANIFEST
 Makefile.old
@@ -9,4 +13,7 @@ nytprof.out
 MANIFEST.bak
 *.sw[po]
 META.yml
+META.json
 MYMETA.*
+*.tar.gz
+Plack-Middleware-RequestId-*
